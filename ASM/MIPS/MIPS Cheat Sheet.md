@@ -58,10 +58,10 @@ an array of integers, where i's value is stored in `$t0` we could use the follow
 ```
 # retrive i-th array element value
 
-mul $t1, $t0, 4			# store the address of the i-th array element
-la  $t2, int_array		# load the integer array into register t2
-add $t3, $t2, $t1		# cast out into the array to the i-th elements position
-lw  $t4, ($t3)			# load the value stored at int_array[i]'s position into register t4
+mul $t1, $t0, 4			# store the address of the i-th array element    
+la  $t2, int_array		# load the integer array into register t2    
+add $t3, $t2, $t1		# cast out into the array to the i-th elements position    
+lw  $t4, ($t3)			# load the value stored at int_array[i]'s position into register t4    
 ```  
 
 
@@ -87,11 +87,11 @@ We can then follow an extrapolated method from 1D arrays to get the [x][y]'th el
 # $t1 holds y
 
 la  $t2, int_array
-mul $t3, $t0, 36				# index y * (sizeof y * sizeof type (4))
+mul $t3, $t0, 36				# index y * (sizeof y * sizeof type (4))    
 add $t4, $t3, $t2				# 
-mul $t5, $t1, 4					# index x * sizeof type (4)
+mul $t5, $t1, 4					# index x * sizeof type (4)    
 add $t6, $t5, $t4				# 
-lw  $t7, ($t6)					# load the value at int_array[x][y] into $t7
+lw  $t7, ($t6)					# load the value at int_array[x][y] into $t7    
 
 
 # [2][9]
