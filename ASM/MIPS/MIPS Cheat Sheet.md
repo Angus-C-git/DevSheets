@@ -31,6 +31,20 @@
 
 ## Theory
 
+
+### SPIM's Memory Layout
+
+![SPIM memory layout](memory.svg)
+
+
+| Segment | Base          |
+| ------- |-------------- |
+| text    | 0x00400000    |
+| data    | 0x10000000    |
+| stack   | 0x7ffffeff    |
+| k_text  | 0x80000000    |
+| k_data  | 0x90000000    |
+
 ### Arrays 
 
 #### 1D-Arrays
@@ -87,9 +101,9 @@ We can then follow an extrapolated method from 1D arrays to get the [x][y]'th el
 # $t1 holds y
 
 la  $t2, int_array
-mul $t3, $t0, 36				# index y * (sizeof y * sizeof type (4))    
+mul $t3, $t0, 36				# index x =  y * (sizeof y * sizeof type (4)) = 36   
 add $t4, $t3, $t2				# 
-mul $t5, $t1, 4					# index x * sizeof type (4)    
+mul $t5, $t1, 4					# index y * sizeof type (4)    
 add $t6, $t5, $t4				# 
 lw  $t7, ($t6)					# load the value at int_array[x][y] into $t7    
 
@@ -102,9 +116,22 @@ array:
 
 ```
 
+The main thing to remember here is that to get the row value we multiply x's index by y's index multiplied by the byte size of elements in the array.
 
 ### Functions
 
+To implement functions in MIPS/SPIM we are required to know a few details about special registers which have specific functions/behaviours and to understand the role of the stack pointer register `$sp` in our programs.
+
+| Register Name | Role                                 |
+| ------------- | -----------------------------------  |
+| $v0, $v0      | Holds value from function return     |
+| $a0           | First argument to a function         |
+| $a1           | Second argument to a function        |
+| $a2           | Third argument to a function         |
+| $a3           | Fourth argument to a function        |
+| $sp           | Holds the value of the stack pointer |
+
+The crux of function logic is pinned on utilising the stack pointer to alot memory for arguments to our function and to store the return 
 
 ## Code Examples
 
@@ -291,7 +318,69 @@ numbers:
 
 ### Branching
 
+#### Return Score
 
+```
+main:
+    la   $a0, prompt            # printf("Enter a mark: ");
+    li   $v0, 4
+    syscall
+
+    li   $v0, 5                 # scanf("%d", mark);
+    syscall
+
+    blt $v0, 50, fail           # check < 50, call fail function
+                    
+    blt $v0, 65, pass           # check < 65
+
+    blt $v0, 75, credit         # check < 75
+
+    blt $v0, 85, distinction    # check < 85
+
+    la   $a0, hd                # else  printf("HD\n");
+    j print
+
+fail:
+    la $a0, fl                  # load fail string into reg a0
+    j print                     
+
+pass:
+    la $a0, ps                  # load pass string into reg a0
+    j print
+
+credit:
+    la $a0, cr                  # load credit string into reg a0
+    j print
+
+distinction:
+    la $a0, dn                  # load distinction string into reg a0
+    j print
+
+print:
+    move $t1, $a0               # $t0 = $t1 $a1, $a0
+    li $v0, 4
+    syscall
+    j end
+
+end:
+    li $v0, 0
+    jr $ra                      # return
+
+
+    .data
+prompt:
+    .asciiz "Enter a mark: "
+fl:
+    .asciiz "FL\n"
+ps:
+    .asciiz "PS\n"
+cr:
+    .asciiz "CR\n"
+dn:
+    .asciiz "DN\n"
+hd:
+    .asciiz "HD\n"
+```
 
 
 ### Functions
