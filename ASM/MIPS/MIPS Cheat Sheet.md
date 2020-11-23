@@ -15,20 +15,27 @@
 
 | SPIM Instruction | MIPS Instruction | Example              | Notes/Description                                                                            |
 | ---------------- | ---------------- | -------------------- | ---------------------------------------------------------------------------------------------|
-| move Rd, Rs      |                  | move $s1, $v0        | 'Copy' the value stored in the register (memeory) on the right into the register on the left |
+| move Rd, Rs      |                  | move $s1, $v0        | 'Copy' the value stored in the register (memory) on the right into the register on the left  |
 | mfhi Rd          | mfhi Rd          | mfhi $s1             |  Set a register equal to the high value in memory                                            |
-| mflo Rd          | mflo Rd          | mflo $s1             |  Set a register equal to the low value in memeory                                            |
+| mflo Rd          | mflo Rd          | mflo $s1             |  Set a register equal to the low value in memory                                             |
 | la Rd, Addr      |                  | la $a0, prompt       |  Load an address into a register, could be a label or register                               |
 | li Rd, imm       | lui	Rd, Imm   | li $v0, 4            |  Load a value immediately into a register, usable registers are 0..15, 16..31                |
-| lb Rd, Addr      |                  | lb $s1, label        |  Load a byte at a particular mememory location                                               |
-| lw Rd, Addr      |                  | lw $s1, x            |  Load a word at a particular mememory location                                               |
+| lb Rd, Addr      |                  | lb $s1, label        |  Load a byte at a particular memory location                                                 |
+| lw Rd, Addr      |                  | lw $s1, x            |  Load a word at a particular memory location                                                 |
 | sb Rs, Addr      |                  | sb $t1, y            |                                                                                              |
 
 
 ### Branches
 
-
-
+| SPIM Instruction | MIPS Instruction | Example              | Notes/Description                                                                            |
+| ---------------- | ---------------- | -------------------- | ---------------------------------------------------------------------------------------------|
+| b  label         |                  | b end                |  Unconditional branch to label, basically same as jump                                       |
+| bal label        |                  | bal main             |  Branch and link                                                                             |
+| beq Rs, Rt, label|                  | beq $t0, $t1, msg    |  Branch if equal to                                                                          |
+| bne Rs, Rt, label|                  | bne $t1, $t4, pass   |  Branch if not equal                                                                         |
+| bge Rs, Rt, label|                  | bge $t1, $t4, pass   |  Branch if greater than or equal to                                                          |
+| ble Rs, Rt, label|                  | ble $t1, $t4, pass   |  Branch if less than or equal to                                                             |
+ 
 ## Theory
 
 
@@ -70,7 +77,7 @@ the keyword associated with the array type to store or load a value. For example
 an array of integers, where i's value is stored in `$t0` we could use the following MIPS/SPIM code.
 
 ```
-# retrive i-th array element value
+# retrieve i-th array element value
 
 mul $t1, $t0, 4			# store the address of the i-th array element    
 la  $t2, int_array		# load the integer array into register t2    
@@ -120,7 +127,7 @@ The main thing to remember here is that to get the row value we multiply x's ind
 
 ### Functions
 
-To implement functions in MIPS/SPIM we are required to know a few details about special registers which have specific functions/behaviours and to understand the role of the stack pointer register `$sp` in our programs.
+To implement functions in MIPS/SPIM we are required to know a few details about special registers which have specific functions/behaviors and to understand the role of the stack pointer register `$sp` in our programs.
 
 | Register Name | Role                                 |
 | ------------- | -----------------------------------  |
@@ -130,8 +137,54 @@ To implement functions in MIPS/SPIM we are required to know a few details about 
 | $a2           | Third argument to a function         |
 | $a3           | Fourth argument to a function        |
 | $sp           | Holds the value of the stack pointer |
+| $ra           | Holds the return address
 
-The crux of function logic is pinned on utilising the stack pointer to alot memory for arguments to our function and to store the return 
+The crux of function logic is pinned on utilizing the stack pointer to allot memory for arguments to our function and to store the return pointer. This logic
+is duplicated for recursive functions where the return address for the function is additionally saved in the stack. Function calls will nearly always follow a 
+structure like this.
+
+```
+# Simple function call with one argument
+
+main:
+    addi $sp, $sp, -8         # create stack frame, by allocating 8 bytes of space on stack         
+    sw   $ra, 4($sp)          # save return address
+    sw   $s0, 0($sp)          # save $s0
+
+    li   $s0, 4               # 
+    move $a0, $s0             # load example arg of value 4
+
+    jal  function             # jump and link to function .    
+
+    move $t0, $v0             # move the result from the function call into t0
+
+    move $a0, $t0             # move the result into a0 to print
+    li   $v0, 1
+    syscall
+
+    lw   $s0, 0($sp)          # restore register $s0
+    lw   $ra, 4($sp)          # restore $ra
+    addi $sp, $sp, 8          # restore stack pointer
+
+    jr $ra                    # end
+
+function:
+    
+    addi $a0, $a0, 2          # add 2 to the function argument
+    move $v0, $a0             # add result into return register
+
+    jr $ra                    # return from function, carrying result in v0 (6)
+
+```
+
+Non-programmatically this follows the process:
+
++ Create enough space on the stack to store return address and function arguments
++ Load function arguments into corresponding `$a0-4` register
++ call `jal` (jump and link) to function label 
++ collect function return in `$v0`
++ restore stagnated registers  
++ restore stack pointer
 
 ## Code Examples
 
@@ -384,6 +437,7 @@ hd:
 
 
 ### Functions
+
 
 #### Recursive Factorials
 ```
