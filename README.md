@@ -1,6 +1,8 @@
 # DevSheets
 A collection of dictionarys and cheatsheets for, programming languages, frameworks &amp; deployment.
 
+~> Currently bad & and in its infancy <3
+
 # Contents
 
 ## [C programming](./C/README.md)
