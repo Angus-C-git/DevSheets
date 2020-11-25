@@ -173,6 +173,31 @@ fwrite(bytes, sizeof(char), 1, file_ptr);
 fclose(file_ptr);
 ```
 
+## Traversing Files
+
+Other than reading through a file one byte at a time or x number of bytes at a time there are a few other ways to move through files namely:
+
++ `fseek`
++ `lseek` (not covered)
+
+these functions allow us to easily skip through files based on a selection of metrics.
+
+### fseek
+
+This function allows us to accelerate the file pointer of a given file stream to a given offset.
+
+`int fseek(file_pointer, offset, whence)`
+
++ offset: number of bytes from whence
++ whence: the position (from a selection) from which to offset
+
+| Whence     | Description                          |
+| -----------| -------------------------------------|
+| `SEEK_SET` | Beginning of a file                  |
+| `SEEK_CUR` | Current position of the file pointer |
+| `SEEK_END` | End of file                          |
+
+
 ## File Meta Data
 
 Another large and important part of file manipulation are the set of functions related to reading file metadata. On unix like operating sytems this kind of file 'header' information is stored in a data structure called INODES. There are many inbuilt functions in the C standard libary for accesing this meta data, the most important of these are:
@@ -245,13 +270,56 @@ printf("mtime =%10ld # Modification time (seconds since 1/1/70)\n",
 
 The libaries also include a number of diffrent macros which can be used to determine basic information about a file.
 
-#### Is Dir
+#### S_ISDIR
 
 The `S_ISDIR` macro is one of the most useful of these macros and is used to determine if the provided mode constitutes a directory. It is used in the following fashion.
 
 ```
 if(S_ISDIR(stat_struct.st_mode))
     /* dir actions */
+```
+
+#### Permission Macros
+
+The set of permission macros can be used with `&` operations to determine if a file, based on its mode, pertains to certain properties namely:
+
++ Readablity
++ Writability 
++ Executiblity
+
+for each of the three permission sets on UNIX like operating sytems. These three groups are.
+
+| Group | Description                                          | Macro Pattern  |
+| ----- | ---------------------------------------------------- |----------------|
+| User  | The user resbonsible for the creation of the file.   | `S_I*USR`      |
+| Group | The permissions associated with the files user group.| `S_I*GRP`      |
+| Other | The other users on the system, global permissions.   | `s_I*OTH`      |
+
+The three options for `*` are:
+
++ `R` for read permissions
++ `W` for write permissions
++ `X` for execute permissions
+
+##### Usage
+
+To utilise the macros the `st_mode` field from the stat struct is needed the mode is then anded with the corresponding macro returning `1` if the permission is set and `0` if the permission is not set.
+
+```
+// print the the permission fields for each 
+// set of users for a given file
+
+// char for present, - if the permission is not set
+
+printf("%s", (S_IRUSR & st.st_mode) ? "r" : "-" );
+printf("%s", (S_IWUSR & st.st_mode) ? "w" : "-" );
+printf("%s", (S_IXUSR & st.st_mode) ? "x" : "-" );
+printf("%s", (S_IRGRP & st.st_mode) ? "r" : "-" );
+printf("%s", (S_IWGRP & st.st_mode) ? "w" : "-" );
+printf("%s", (S_IXGRP & st.st_mode) ? "x" : "-" );
+printf("%s", (S_IROTH & st.st_mode) ? "r" : "-" );
+printf("%s", (S_IWOTH & st.st_mode) ? "w" : "-" );
+printf("%s", (S_IXOTH & st.st_mode) ? "x" : "-" );
 ```
 
 ### Modifying File Metadata && OS Calls
@@ -266,6 +334,7 @@ if (mkdir(dir_name, permission) != 0) {
     return 1;
 }
 ```
+
 
 #### List Directory
 
