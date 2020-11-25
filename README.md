@@ -35,7 +35,7 @@ A collection of dictionarys and cheatsheets for, programming languages, framewor
 
 ### [MIPS](./ASM/MIPS/README.md)
 
-#### [Mips Cheat Sheet](./MIPS/MIPS_Cheat_Sheet.md)
+#### [Mips Cheat Sheet](./ASM/MIPS/MIPS_Cheat_Sheet.md)
 
 ## [Algorithms](./Algorithms/README.md)
 
