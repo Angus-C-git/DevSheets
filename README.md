@@ -24,12 +24,12 @@ A collection of dictionarys and cheatsheets for, programming languages, framewor
 
 ### Bitshifting
 
-1. [Bitshifting Cheat Sheet](./bitshifting.md)
-2. [Bitshifting Notes & Code Snippets](./bitmasks.c)
+1. [Bitshifting Cheat Sheet](./C/bitshifting.md)
+2. [Bitshifting Notes & Code Snippets](./C/bitmasks.c)
 
 ### Files
 
-1. [Files Cheat Sheet](./files.md)
+1. [Files Cheat Sheet](./C/files.md)
 
 ## [Assembly Programming](./ASM/README.md) 
 
