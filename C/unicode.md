@@ -15,7 +15,7 @@ Everything in unicode is assigned a code point which is a unique combination of 
 |#Bytes | #Bits | Byte 1   |  Byte 2    | Byte 3     | Byte 4     | Holds                                             | 
 | ----- | ----- | -------- | ---------- | ---------- | ---------- | ------------------------------------------------- |
 | 1     | 7     | 0xxxxxxx | -          | -          | -          | ASCII encodings                                   |
-| 2     | 11    | 110xxxxx | 10xxxxxx   | -          | -          | 2-byte codes including most latin-scrip alphabets |
+| 2     | 11    | 110xxxxx | 10xxxxxx   | -          | -          | 2-byte codes including most latin-script alphabets|
 | 3     | 16    | 1110xxxx | 10xxxxxx   | 10xxxxxx   | -          | 3-byte codes including most Asian languages       | 
 | 4     | 21    | 11110xxx | 10xxxxxx   | 10xxxxxx   | 10xxxxxx   | 4-byte codes inclduing symbols and emojis         |
 
@@ -23,6 +23,16 @@ Everything in unicode is assigned a code point which is a unique combination of 
 + A 2-byte character starts out with a leading `110` set of bits
 + A 3-byte character starts out with a leading `1110` set of bits
 + A 4-byte character starts out with a leading `11110` set of bits
+
+| Leading Bit Set | Hex Encoding  |
+| --------------- | ------------- | 
+| 0               | 0x0           |
+| 110             | 0xc           |
+| 1110            | 0xe0          |
+| 11110           | 0xf0          | 
+| 111110          | 0xf8          |
+
+* Remember the leading `1` bit for multi byte codes
 
 ### Example Encodings
 
