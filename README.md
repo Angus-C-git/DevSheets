@@ -33,6 +33,10 @@ A collection of dictionarys and cheatsheets for, programming languages, framewor
 
 1. [Files Cheat Sheet](./C/files.md)
 
+### Floats
+
+1. [Floats Cheat Sheet](./C/floats.md)
+
 ## [Assembly Programming](./ASM/README.md) 
 
 ### [MIPS](./ASM/MIPS/README.md)
