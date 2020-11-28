@@ -37,11 +37,15 @@ A collection of dictionarys and cheatsheets for, programming languages, framewor
 
 1. [Floats Cheat Sheet](./C/floats.md)
 
+### Unicode
+
+1. [Unicode Cheat Sheet](./C/unicode.md)
+
 ## [Assembly Programming](./ASM/README.md) 
 
 ### [MIPS](./ASM/MIPS/README.md)
 
-#### [Mips Cheat Sheet](./ASM/MIPS/MIPS_Cheat_Sheet.md)
+1. [Mips Cheat Sheet](./ASM/MIPS/MIPS_Cheat_Sheet.md)
 
 ## [Algorithms](./Algorithms/README.md)
 

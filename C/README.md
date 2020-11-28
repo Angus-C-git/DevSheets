@@ -25,3 +25,7 @@
 ## Files
 
 1. [Files Cheat Sheet](./files.md)
+
+## Unicode
+
+1. [Unicode Cheat Sheet](./C/unicode.md)
