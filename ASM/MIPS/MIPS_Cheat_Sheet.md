@@ -140,8 +140,7 @@ To implement functions in MIPS/SPIM we are required to know a few details about 
 | $ra           | Holds the return address
 
 The crux of function logic is pinned on utilizing the stack pointer to allot memory for arguments to our function and to store the return pointer. This logic
-is duplicated for recursive functions where the return address for the function is additionally saved in the stack. Function calls will nearly always follow a 
-structure like this.
+is duplicated for recursive functions where the return address for the function is additionally saved in the stack. Function calls will nearly always follow a structure like this.
 
 ```
 # Simple function call with one argument
@@ -177,14 +176,16 @@ function:
 
 ```
 
+
 Non-programmatically this follows the process:
 
-+ Create enough space on the stack to store return address and function arguments
++ Create enough space on the stack to store return address, function arguments AND anything that needs to be preserved between function calls
 + Load function arguments into corresponding `$a0-4` register
 + call `jal` (jump and link) to function label 
 + collect function return in `$v0`
 + restore stagnated registers  
 + restore stack pointer
+
 
 ## Code Examples
 
