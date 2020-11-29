@@ -207,6 +207,8 @@ Another large and important part of file manipulation are the set of functions r
 
 ### Stat && The Stat Struct
 
+*`stat()` is contained in the `sys/stat.h` libarary.
+
 Perhaps the most useful function in this section is the `stat` function which returns the stat struct for a given file. The function has the following syntax.
 
 `stat(file_path, &stat_struct);`
