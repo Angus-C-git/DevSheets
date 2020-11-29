@@ -49,8 +49,26 @@ A collection of dictionarys and cheatsheets for, programming languages, framewor
 
 ## [Algorithms](./Algorithms/README.md)
 
+### Graphs
+
+1. [Depth First Search](./Algorithms/Graphs/DFS.md)
+2. [Breadth First Search](./Algorithms/Graphs/BFS.md)
+3. [Dijkstras {Shortest Paths}](./Algorithms/Graphs/Dijkstras.md)
+
+### Trees
+
+1. [Tree Algorithms Cheat Sheet](./Algorithms/Trees/Trees.md)
+
 ## [Data Structures](./Data%20Structures/README.md)
 
-### [Trees](./Data%20Structures/Trees/README.md)
+### Linked Lists
 
-#### [Binary Search Trees](./Data%20Structures/Trees/BSTs.md)
+1. [Linked List Cheatsheet](./Data%20Structures/LinkedLists/linked_lists.md)
+
+### Queues
+
+1. [Queues Cheat Sheet](./Data%20Structures/Queues/Queues.md)
+
+### Trees
+
+1. [Binary Search Trees](./Data%20Structures/Trees/BSTs.md)
