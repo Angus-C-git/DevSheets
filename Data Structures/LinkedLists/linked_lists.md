@@ -51,3 +51,16 @@ struct list {
 };
 
 ```
+## Typical ADT Functions
+
+### New List
+
++ Complexity => O(1)
+
+### New Node
+
++ Complexity => O(1)
+
+### List Size
+
++ Complexity => O(1)

@@ -57,7 +57,31 @@ A collection of dictionarys and cheatsheets for, programming languages, framewor
 
 ### Trees
 
+## BSTs
+
 1. [Tree Algorithms Cheat Sheet](./Algorithms/Trees/Trees.md)
+2. [BST Searching](./Algorithms/Trees/BSTSearch.md)
+3. [BST Insertion](./Algorithms/Trees/BSTInsertion.md)
+4. [BST Deletion](./Algorithms/Trees/BSTDeletion.md)
+
+## Tries
+
+1. [Trie Algorithms Cheat Sheet](./Algorithms/Trees/Tries.md)
+
+### Linked Lists
+
+1. [Searching](./Algorithms/LinkedLists/SearchingLLs.md)
+2. [Reversing](./Algorithms/LinkedLists/ReversingLLs.md)
+3. [Deleting](./Algorithms/LinkedLists/DeletingLLs.md)
+4. [Merging](./Algorithms/LinkedLists/MergingLLS.md)
+
+### Sorts
+
+1. [Bubble Sort]()
+2. [Insertion Sort]()
+3. [Merge Sort]()
+4. [Quick Sort]()
+5. [Selection Sort]()
 
 ## [Data Structures](./Data%20Structures/README.md)
 
