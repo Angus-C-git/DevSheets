@@ -2,36 +2,52 @@
 
 ## Overview
 
+Linked lists are a unique way to represent a sequence of connected or sequential items without storing each item one after another in memory. This is achived by each item in the list pointing to the next item in the list. In the case of doubly linked lists the node preceding the current item is also pointed to.
 
 ## Singly Linked Lists
 
-### Searching
-
-### Reversing
-
-1. Keep inserting at the head of the list
-2. Set the head of the orignial head to the updated one
+A singly linked list will typically be represented in the following manner.
 
 ```
-void listReverse(List l) {
+list {
+	Key : Val,
+	Next : item
+}
+```
 
-	Node current, prev, 
-	Node tmp = current;
+In C a typical representation is as follows.
 
-	for (current = l->head, prev = NULL; current; tmp = current) {
-		
-		current = current->next;
-		tmp->next = prev;
-		prev = tmp;
-
-	} l->head = prev;
+```
+typedef struct node *Node;
+struct node {
+	int key;
+	Node next;
 }
 
+typedef struct list *List;
+struct list {
+	Node head;
+}
 ```
 
 ## Doubly Linked List
 
 
-### Searching
+A typical representation in C is.
 
-### Reversing
+```
+typedef struct node *Node;
+struct node {
+	int value;
+	Node next;
+	Node prev;
+};
+
+typedef struct list *List;
+struct list {
+	Node first;
+	Node last;
+	int size;
+};
+
+```
