@@ -41,9 +41,9 @@ A collection of dictionarys and cheatsheets for, programming languages, framewor
 
 1. [Unicode Cheat Sheet](./C/unicode.md)
 
-## Assembly Programming 
+## [Assembly Programming](./ASM/README.md) 
 
-### [MIPS](./ASM/MIPS/README.md)
+### MIPS
 
 1. [Mips Cheat Sheet](./ASM/MIPS/MIPS_Cheat_Sheet.md)
 
