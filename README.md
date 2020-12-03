@@ -51,9 +51,10 @@ A collection of dictionarys and cheatsheets for, programming languages, framewor
 
 ### Graphs
 
-1. [Depth First Search](./Algorithms/Graphs/DFS.md)
-2. [Breadth First Search](./Algorithms/Graphs/BFS.md)
-3. [Dijkstras {Shortest Paths}](./Algorithms/Graphs/Dijkstras.md)
+1. [Graph Fundementals](./Algorithms/Graphs/GraphBasics.md)
+2. [Depth First Search](./Algorithms/Graphs/DFS.md)
+3. [Breadth First Search](./Algorithms/Graphs/BFS.md)
+4. [Dijkstras {Shortest Paths}](./Algorithms/Graphs/Dijkstras.md)
 
 ### Trees
 
@@ -77,11 +78,11 @@ A collection of dictionarys and cheatsheets for, programming languages, framewor
 
 ### Sorts
 
-1. [Bubble Sort]()
-2. [Insertion Sort]()
-3. [Merge Sort]()
-4. [Quick Sort]()
-5. [Selection Sort]()
+1. [Bubble Sort](./Algorithms/Sorts/BubbleSort.md)
+2. [Insertion Sort](./Algorithms/Sorts/InsertionSort.md)
+3. [Merge Sort](./Algorithms/Sorts/MergeSort.md)
+4. [Quick Sort](./Algorithms/Sorts/QuickSort.md)
+5. [Selection Sort](./Algorithms/Sorts/SelectionSort.md)
 
 ## [Data Structures](./Data%20Structures/README.md)
 
