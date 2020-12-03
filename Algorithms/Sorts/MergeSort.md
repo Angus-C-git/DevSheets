@@ -2,22 +2,101 @@
 
 ## Overview
 
+![Merge Sort Animation](./images/MergeSort.gif)
 
+Three Variants:
+
++ Top down
++ Bottom up
++ Natural
 
 ## Characteristics
 
 + Worst Case Time Complexity => O(n log n)
-+ Is adaptive
++ Gnerally not adaptive
++ Stable sort
 
 ## Pseudocode Implementation
 
 ```
 
-// TODO
+func mergesort( var a as array )
+     if ( n == 1 ) return a
+
+     var l1 as array = a[0] ... a[n/2]
+     var l2 as array = a[n/2+1] ... a[n]
+
+     l1 = mergesort( l1 )
+     l2 = mergesort( l2 )
+
+     return merge( l1, l2 )
+end func
+
+func merge( var a as array, var b as array )
+     var c as array
+
+     while ( a and b have elements )
+          if ( a[0] > b[0] )
+               add b[0] to the end of c
+               remove b[0] from b
+          else
+               add a[0] to the end of c
+               remove a[0] from a
+     while ( a has elements )
+          add a[0] to the end of c
+          remove a[0] from a
+     while ( b has elements )
+          add b[0] to the end of c
+          remove b[0] from b
+     return c
+end func
 
 ```
 
 ## C Implementation
+
+### Implementation One
+
+```
+void mergeSort(int A[], int lo, int hi) {
+	if (lo >= hi) return;
+	
+	int mid = (lo + hi) / 2;
+	mergeSort(A, lo, mid);
+	mergeSort(A, mid + 1, hi);
+	merge(A, lo, mid, hi);
+}
+
+void merge(int A[], int lo, int mid, int hi) {
+	int nitems = hi - lo + 1;
+	int *tmp = malloc(nitems * sizeof(int));
+	
+	int i = lo;
+	int j = mid + 1;
+	int k = 0;
+	
+	// scan both segments into tmp
+	while (i <= mid && j <= hi) {
+		if (A[i] <= A[j]) {
+			tmp[k++] = A[i++];
+		} else {
+			tmp[k++] = A[j++];
+		}
+	}
+	
+	// copy items from unfinished segment
+	while (i <= mid) tmp[k++] = A[i++];
+	while (j <= hi)  tmp[k++] = A[j++];
+	
+	// copy items from tmp back to main array
+	for (i = lo, k = 0; i <= hi; i++, k++) {
+		A[i] = tmp[k];
+	}
+	free(tmp);
+
+```
+
+### Implementation Two
 
 ```
 
@@ -70,3 +149,4 @@ void CopyArray(A[], iBegin, iEnd, B[])
 }
 
 ```
+

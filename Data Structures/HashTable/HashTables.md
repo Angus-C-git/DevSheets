@@ -40,5 +40,38 @@ HashTable newHashTable(int N) {
     return new;
 }
 
+void HashInsert(HashTable ht, Item it) {
+   int h = hash(key(it), ht->N);
+   // assume table slot empty!?
+   ht->items[h] = copy(it);
+   ht->nitems++;
+}
+
+Item *HashGet(HashTable ht, Key k) {
+   int h = hash(k, ht->N);
+   Item *itp = ht->items[h];
+   if (itp != NULL && equal(key(*itp),k))
+      return itp;
+   else
+      return NULL;
+}
+
+void HashDelete(HashTable ht, Key k) {
+   int h = hash(k, ht->N);
+   Item *itp = ht->items[h];
+   if (itp != NULL && equal(key(*itp),k)) {
+      free(itp);
+      ht->items[h] = NULL;
+      ht->nitems--;
+   }
+}
+
+void dropHashTable(HashTable ht) {
+   for (int i = 0; i < ht->N; i++) {
+      if (ht->items[i] != NULL) free(ht->items[i]);
+   }
+   free(ht);
+}
+
 ```
 

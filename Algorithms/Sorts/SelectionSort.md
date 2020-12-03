@@ -7,12 +7,26 @@
 ## Characteristics
 
 + Worst Case Time Complexity => O(n^2)
-+ Is adaptive
++ Can be made stable (gneral implementation is not)
++ Not adaptive
 
 ## Pseudocode Implementation
 
 ```
-// todo
+// SelectionSort sorts the elements of a in ascending order.
+func SelectionSort(a []int) {
+    for j := 0; j < len(a)-1; j++ {
+        // Invariant: a[:j] contains the first j elements
+        // of the final sorted slice.
+        minPos := j
+        for i := j + 1; i < len(a); i++ {
+            if a[i] < a[minPos] {
+                minPos = i
+            }
+        }
+        a[j], a[minPos] = a[minPos], a[j]
+    }
+}
 ```
 
 ## C Implementation

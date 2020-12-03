@@ -78,11 +78,12 @@ A collection of dictionarys and cheatsheets for, programming languages, framewor
 
 ### Sorts
 
-1. [Bubble Sort](./Algorithms/Sorts/BubbleSort.md)
-2. [Insertion Sort](./Algorithms/Sorts/InsertionSort.md)
-3. [Merge Sort](./Algorithms/Sorts/MergeSort.md)
-4. [Quick Sort](./Algorithms/Sorts/QuickSort.md)
-5. [Selection Sort](./Algorithms/Sorts/SelectionSort.md)
+1. [Sorting Overview](./Algorithms/Sorts/Sorting.md)
+2. [Bubble Sort](./Algorithms/Sorts/BubbleSort.md)
+3. [Insertion Sort](./Algorithms/Sorts/InsertionSort.md)
+4. [Merge Sort](./Algorithms/Sorts/MergeSort.md)
+5. [Quick Sort](./Algorithms/Sorts/QuickSort.md)
+6. [Selection Sort](./Algorithms/Sorts/SelectionSort.md)
 
 ## [Data Structures](./Data%20Structures/README.md)
 
@@ -97,3 +98,7 @@ A collection of dictionarys and cheatsheets for, programming languages, framewor
 ### Trees
 
 1. [Binary Search Trees](./Data%20Structures/Trees/BSTs.md)
+
+### Hash Tables
+
+1. [Hash Tables](./Data%20Structures/HashTable/HashTables.md)
