@@ -5,6 +5,8 @@ A collection of dictionarys and cheatsheets for, programming languages, framewor
 
 # Contents
 
+## [Operating Systems](./OS/README.md)
+
 ## [C programming](./C/README.md)
 
 ### Basic Syntax

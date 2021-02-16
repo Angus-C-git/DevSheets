@@ -1,0 +1,419 @@
+# OS/161 Operating System Manual
+
+► [Overview]()  
+► [Kernel Module]()  
+► [Installation]()
+
+## Overview
+
+The OS/161 Operating system is a UNIX like educational operating system developed by Systems Research at Harvard University. The OS/161 source tree includes three main components:
+
++ OS/161
++ System/161, the simulated machine that OS/161 runs on
++ Development tools required to compile and debug code for the simulated machine
+
+The OS/161 source code distribution contains a full operating system source tree, including the kernel, libraries, various utilities (ls, cat, etc.), and some test programs. OS/161 boots on the simulated machine in the same manner as a real system might boot on real hardware. 
+
+### Source Tree
+```
+.
+├── CHANGES
+├── common
+│   ├── gcc-millicode
+│   └── libc
+├── configure
+├── design
+│   ├── shell.txt
+│   └── usermalloc.txt
+├── kern
+│   ├── arch
+│   ├── compile
+│   ├── conf
+│   ├── dev
+│   ├── fs
+│   ├── gdbscripts
+│   ├── include
+│   ├── lib
+│   ├── main
+│   ├── Makefile
+│   ├── proc
+│   ├── syscall
+│   ├── test
+│   ├── thread
+│   ├── vfs
+│   └── vm
+├── Makefile
+├── man
+│   ├── bin
+│   ├── dev
+│   ├── index.html
+│   ├── libc
+│   ├── Makefile
+│   ├── man.css
+│   ├── manindex.css
+│   ├── misc
+│   ├── sbin
+│   ├── syscall
+│   └── testbin
+├── mk
+│   ├── fixdepends.sh
+│   ├── installheaders.sh
+│   ├── os161.baserules.mk
+│   ├── os161.compile.mk
+│   ├── os161.config-mips.mk
+│   ├── os161.config.mk
+│   ├── os161.hostcompile.mk
+│   ├── os161.hostlib.mk
+│   ├── os161.hostprog.mk
+│   ├── os161.includes.mk
+│   ├── os161.kernel.mk
+│   ├── os161.lib.mk
+│   ├── os161.man.mk
+│   ├── os161.mkdirs.mk
+│   ├── os161.prog.mk
+│   ├── os161.script.mk
+│   └── os161.subdir.mk
+├── testscripts
+│   ├── Makefile
+│   ├── runtest.py
+│   └── test.py
+└── userland
+    ├── bin
+    ├── include
+    ├── lib
+    ├── Makefile
+    ├── sbin
+    └── testbin
+
+36 directories, 32 files
+
+
+```
+
+### System/161
+
+System/161 simulates a "real" machine to run OS/161 on. The machine features a MIPS R2000/R3000 CPU including an MMU, but no floating point unit or cache.
+
+
+## Kernel Module
+
+This directory and its subdirectories are where most (if not all) of the action takes place. The only file in this directory is a Makefile. This Makefile only installs various header files. It does not actually build anything. 
+
+### Module Tree
+```
+.
+├── arch
+│   ├── mips
+│   │   ├── conf
+│   │   │   ├── conf.arch
+│   │   │   └── ldscript
+│   │   ├── include
+│   │   │   ├── current.h
+│   │   │   ├── elf.h
+│   │   │   ├── kern
+│   │   │   │   ├── endian.h
+│   │   │   │   ├── regdefs.h
+│   │   │   │   ├── setjmp.h
+│   │   │   │   ├── signal.h
+│   │   │   │   └── types.h
+│   │   │   ├── membar.h
+│   │   │   ├── specialreg.h
+│   │   │   ├── spinlock.h
+│   │   │   ├── thread.h
+│   │   │   ├── tlb.h
+│   │   │   ├── trapframe.h
+│   │   │   ├── types.h
+│   │   │   └── vm.h
+│   │   ├── locore
+│   │   │   ├── cache-mips161.S
+│   │   │   ├── exception-mips1.S
+│   │   │   └── trap.c
+│   │   ├── syscall
+│   │   │   └── syscall.c
+│   │   ├── thread
+│   │   │   ├── cpu.c
+│   │   │   ├── switchframe.c
+│   │   │   ├── switchframe.h
+│   │   │   ├── switch.S
+│   │   │   ├── thread_machdep.c
+│   │   │   └── threadstart.S
+│   │   └── vm
+│   │       ├── dumbvm.c
+│   │       ├── ram.c
+│   │       ├── tlb-mips161.S
+│   │       └── unsw.c
+│   └── sys161
+│       ├── conf
+│       │   └── conf.arch
+│       ├── dev
+│       │   └── lamebus_machdep.c
+│       ├── include
+│       │   ├── bus.h
+│       │   └── maxcpus.h
+│       └── main
+│           └── start.S
+├── compile
+├── conf
+│   ├── ASST0
+│   ├── config
+│   ├── conf.kern
+│   ├── DUMBVM
+│   ├── DUMBVM-OPT
+│   ├── GENERIC
+│   ├── GENERIC-OPT
+│   └── newvers.sh
+├── dev
+│   ├── generic
+│   │   ├── beep.c
+│   │   ├── beep.h
+│   │   ├── console.c
+│   │   ├── console.h
+│   │   ├── random.c
+│   │   ├── random.h
+│   │   ├── rtclock.c
+│   │   └── rtclock.h
+│   └── lamebus
+│       ├── beep_ltimer.c
+│       ├── conf.lamebus
+│       ├── con_lscreen.c
+│       ├── con_lser.c
+│       ├── emu_att.c
+│       ├── emu.c
+│       ├── emu.h
+│       ├── lamebus.c
+│       ├── lamebus.h
+│       ├── lhd_att.c
+│       ├── lhd.c
+│       ├── lhd.h
+│       ├── lnet_att.c
+│       ├── lnet.c
+│       ├── lrandom_att.c
+│       ├── lrandom.c
+│       ├── lrandom.h
+│       ├── lscreen_att.c
+│       ├── lscreen.c
+│       ├── lscreen.h
+│       ├── lser_att.c
+│       ├── lser.c
+│       ├── lser.h
+│       ├── ltimer_att.c
+│       ├── ltimer.c
+│       ├── ltimer.h
+│       ├── ltrace_att.c
+│       ├── ltrace.c
+│       ├── ltrace.h
+│       ├── random_lrandom.c
+│       └── rtclock_ltimer.c
+├── fs
+│   ├── semfs
+│   │   ├── semfs_fsops.c
+│   │   ├── semfs.h
+│   │   ├── semfs_obj.c
+│   │   └── semfs_vnops.c
+│   └── sfs
+│       ├── sfs_balloc.c
+│       ├── sfs_bmap.c
+│       ├── sfs_dir.c
+│       ├── sfs_fsops.c
+│       ├── sfs_inode.c
+│       ├── sfs_io.c
+│       ├── sfsprivate.h
+│       └── sfs_vnops.c
+├── gdbscripts
+│   ├── array
+│   ├── mips-userland
+│   └── wchan
+├── include
+│   ├── addrspace.h
+│   ├── array.h
+│   ├── bitmap.h
+│   ├── cdefs.h
+│   ├── clock.h
+│   ├── copyinout.h
+│   ├── cpu.h
+│   ├── current.h
+│   ├── device.h
+│   ├── elf.h
+│   ├── emufs.h
+│   ├── endian.h
+│   ├── fs.h
+│   ├── hangman.h
+│   ├── kern
+│   │   ├── endian.h
+│   │   ├── errmsg.h
+│   │   ├── errno.h
+│   │   ├── fcntl.h
+│   │   ├── ioctl.h
+│   │   ├── iovec.h
+│   │   ├── limits.h
+│   │   ├── reboot.h
+│   │   ├── resource.h
+│   │   ├── seek.h
+│   │   ├── sfs.h
+│   │   ├── signal.h
+│   │   ├── socket.h
+│   │   ├── stat.h
+│   │   ├── stattypes.h
+│   │   ├── syscall.h
+│   │   ├── time.h
+│   │   ├── types.h
+│   │   ├── unistd.h
+│   │   └── wait.h
+│   ├── lib.h
+│   ├── limits.h
+│   ├── mainbus.h
+│   ├── membar.h
+│   ├── proc.h
+│   ├── setjmp.h
+│   ├── sfs.h
+│   ├── signal.h
+│   ├── spinlock.h
+│   ├── spl.h
+│   ├── stat.h
+│   ├── stdarg.h
+│   ├── synch.h
+│   ├── syscall.h
+│   ├── test.h
+│   ├── thread.h
+│   ├── threadlist.h
+│   ├── threadprivate.h
+│   ├── types.h
+│   ├── uio.h
+│   ├── version.h
+│   ├── vfs.h
+│   ├── vm.h
+│   ├── vnode.h
+│   └── wchan.h
+├── lib
+│   ├── array.c
+│   ├── bitmap.c
+│   ├── bswap.c
+│   ├── kgets.c
+│   ├── kprintf.c
+│   ├── misc.c
+│   ├── time.c
+│   └── uio.c
+├── main
+│   ├── main.c
+│   └── menu.c
+├── Makefile
+├── proc
+│   └── proc.c
+├── syscall
+│   ├── loadelf.c
+│   ├── runprogram.c
+│   └── time_syscalls.c
+├── test
+│   ├── arraytest.c
+│   ├── bitmaptest.c
+│   ├── fstest.c
+│   ├── kmalloctest.c
+│   ├── nettest.c
+│   ├── semunit.c
+│   ├── synchtest.c
+│   ├── threadlisttest.c
+│   ├── threadtest.c
+│   └── tt3.c
+├── thread
+│   ├── clock.c
+│   ├── hangman.c
+│   ├── spinlock.c
+│   ├── spl.c
+│   ├── synch.c
+│   ├── thread.c
+│   └── threadlist.c
+├── vfs
+│   ├── device.c
+│   ├── devnull.c
+│   ├── vfscwd.c
+│   ├── vfsfail.c
+│   ├── vfslist.c
+│   ├── vfslookup.c
+│   ├── vfspath.c
+│   └── vnode.c
+└── vm
+    ├── addrspace.c
+    ├── copyinout.c
+    └── kmalloc.c
+```
+
+### arch
+
+This directory contains architecture- and platform-dependent code, which means it is specific to a particular type of CPU that OS/161 runs on. Different machine architectures have their own specific architecture-dependent directory. Currently, there is only one supported architecture, which is mips, and one supported machine, sys161. 
+
+### compile
+
+Typically contains various kernel builds like:
+
++ Debug
++ Profiling
++ Mainline
+
+`./path/config <FILE>`
+
+### conf
+
+config is a shell script that takes a config file, and creates the corresponding build directory. 
+
+### include
+
+These are the include files that the kernel needs. The kern subdirectory contains include files that are visible not only to the operating system itself, but also to user-level programs. 
+
+### main
+
+This is where the kernel is initialised and where the kernel main function is implemented. 
+
+### thread
+
+Threads are the fundamental abstraction on which the kernel is built. 
+
+### lib
+
+These are library routines used throughout the kernel, e.g., string manipulation, bitmaps, console management, etc. 
+
+### vm
+
+Virtual memory would be mostly implemented in here. Currently it contains basic address-space management functionality and the kernel malloc implementation.
+kern/fs
+
+### fs
+
+The file system implementations. OS/161 currently implements one file system called sfs. 
+
+#### sfs
+
+This is the simple file system that OS/161 contains by default.
+
+### vfs
+
+his is the file-system independent layer (vfs stands for "Virtual File System"). It establishes a framework into which you can add new file systems easily.
+
+### dev
+
+This is where all the low level device management code is stored. 
+
+
+
+## Installation
+
+### Linux
+
+Run my script: [COMP3231_setup.sh](./setup/COMP3231_setup_setup.sh)
+
+OR:
+
+1. `mkdir Tools`
+2. `wget http://www.cse.unsw.edu.au/~cs3231/os161-files/os161-utils_2.0.8-3.deb`
+3. `sudo dpkg -i os161-utils_2.0.8-3.deb`
+4. `echo $PATH | grep /usr/local/bin` should highlight the dir in red if it is in the current shell path
+    
+    1. Add to path if necessary with `echo "export PATH=${PATH}:/usr/local/bin" >> ~/.bashrc` if you are using bash (even tho fish is way better)
+
+
+### Mac OS
+
+
+
+### Windows
+
+No.
