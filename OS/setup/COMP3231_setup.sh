@@ -66,7 +66,7 @@ bmake install
 
 printf "\n"
 
-printf "\n${Green}File System Should Now Be Shown Bellow ${NC}\n \n"
+printf "\n${Green}File System Should Now Be Shown Below ${NC}\n \n"
 
 printf "\n==============================================\n"
 
