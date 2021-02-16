@@ -398,7 +398,7 @@ This is where all the low level device management code is stored.
 
 ### Linux
 
-Run my script: [COMP3231_setup.sh](./setup/COMP3231_setup_setup.sh)
+Run my script: [COMP3231_setup.sh](./setup/COMP3231_setup.sh)
 
 OR:
 
