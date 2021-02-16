@@ -1,8 +1,8 @@
 # OS/161 Operating System Manual
 
-► [Overview]()  
-► [Kernel Module]()  
-► [Installation]()
+► [Overview](#Overview)  
+► [Kernel Module](#Kernel-Module)  
+► [Installation](#Installation)
 
 ## Overview
 
