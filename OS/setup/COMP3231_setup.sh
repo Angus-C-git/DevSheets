@@ -37,7 +37,7 @@ os161-gcc
 
 printf "\n==============================================\n"
 
-echo "Produced Error Msg should match: "
+echo "Produced Error Msg Should Match: "
 
 printf "\n==============================================\n"
 
