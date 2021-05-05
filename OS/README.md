@@ -1,23 +1,23 @@
 # Operating Systems
 
-![](./images/OS_Diagram.svg)
+![OS Cover Diagram](./images/OS_Diagram.svg)
 
 ## Contents
 
 ► [Overview](#Overview)    
-► [Glossary of Terms](./TermsGlossary)    
-► [OS/161 Case Study OS](./os_161)   
-► [Processes and Threads](./Processes_Threads)  
-► [Concurrency and Synchronisation](./Concurrency_Synchronisation)   
-► [Deadlock](./Deadlock)  
-► [System Calls](./Syscalls)   
-► [Memory Hierachy and Caching](./MemoryHierachy)   
-► [File Managment](./FileManagment)   
-► [Memory Managment](./MemoryManagment)   
-► [Virtual Memory](./VirtualMemory)   
-► [Multiprocessors](./Multiprocessors)   
-► [Scheduling](./Scheduling)   
-► [I/O](./IO)
+► [Glossary of Terms](./TermsGlossary.md)    
+► [OS/161 Case Study OS](./os_161.md)   
+► [Processes and Threads](./Processes_Threads.md)  
+► [Concurrency and Synchronisation](./Concurrency_Synchronisation.md)   
+► [Deadlock](./Deadlock.md)  
+► [System Calls](./Syscalls.md)   
+► [Memory Hierachy and Caching](./MemoryHierachy.md)   
+► [File Managment](./FileManagment.md)   
+► [Memory Managment](./MemoryManagment.md)   
+► [Virtual Memory](./VirtualMemory.md)   
+► [Multiprocessors](./Multiprocessors.md)   
+► [Scheduling](./Scheduling.md)   
+► [I/O](./IO.md)
 
 ## Overview
 
