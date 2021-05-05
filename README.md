@@ -1,106 +1,127 @@
 # DevSheets
 A collection of dictionarys and cheatsheets for, programming languages, frameworks &amp; deployment.
 
-~> Currently bad & and in its infancy <3 
+**A work in progress, or lack there of.**
 
 # Contents
 
 ## [Operating Systems](./OS/README.md)
 
+### Overview and Terms
+
+► [Overview](./OS/README.md#Overview)    
+► [Glossary of Terms](./OS/TermsGlossary.md) 
+
+### Case Study OS
+
+► [OS/161 Case Study OS](./OS/os_161.md)  
+
+### OS Internals
+
+► [Processes and Threads](./OS/Processes_Threads.md)  
+► [Concurrency and Synchronisation](./OS/Concurrency_Synchronisation.md)   
+► [Deadlock](./OS/Deadlock.md)  
+► [System Calls](./OS/Syscalls.md)   
+► [Memory Hierachy and Caching](./OS/MemoryHierachy.md)   
+► [File Managment](./OS/FileManagment.md)   
+► [Memory Managment](./OS/MemoryManagment.md)   
+► [Virtual Memory](./OS/VirtualMemory.md)   
+► [Multiprocessors](./OS/Multiprocessors.md)   
+► [Scheduling](./OS/Scheduling.md)   
+► [I/O](./OS/IO.md)
+
 ## [C programming](./C/README.md)
 
 ### Basic Syntax
 
- 1. [Variables & Types](./C/variables_basicTypes.c)
- 2. [Strings](./C/strings.c)
- 3. [Loops](./C/loops.c)
- 4. [Conditions](./C/conditions.c)
- 5. [Arrays](./C/arrays.c)
- 6. [Functions](./C/functions.c)
- 7. [Pass By Refrence](./C/pass_by_refrence.c)
- 8. [Static Functions & Variables](./C/static_vars_funcs.c)
- 9. [Recursion](./C/recursion.c)
- 10. [Pointers](./C/pointers.c)
- 11. [Pointer Arithmetic](./C/pointer_arithmetic.c)
- 12. [Function Pointers](./C/function_pointers.c)
- 13. [Structures](./C/structures.c)
- 14. [Unions](./C/unions.c)
+ ► [Variables & Types](./C/variables_basicTypes.c)   
+ ► [Strings](./C/strings.c)   
+ ► [Loops](./C/loops.c)  
+ ► [Conditions](./C/conditions.c)  
+ ► [Arrays](./C/arrays.c)   
+ ► [Functions](./C/functions.c)   
+ ► [Pass By Refrence](./C/pass_by_refrence.c)   
+ ► [Static Functions & Variables](./C/static_vars_funcs.c)   
+ ► [Recursion](./C/recursion.c)   
+ ► [Pointers](./C/pointers.c)   
+ ► [Pointer Arithmetic](./C/pointer_arithmetic.c)   
+ ► [Function Pointers](./C/function_pointers.c)   
+ ► [Structures](./C/structures.c)   
+ ► [Unions](./C/unions.c)   
 
 ### Bitshifting
 
-1. [Bitshifting Cheat Sheet](./C/bitshifting.md)
-2. [Bitshifting Notes & Code Snippets](./C/bitmasks.c)
+► [Bitshifting Cheat Sheet](./C/bitshifting.md)    
+► [Bitshifting Notes & Code Snippets](./C/bitmasks.c)   
 
 ### Files
 
-1. [Files Cheat Sheet](./C/files.md)
+► [Files Cheat Sheet](./C/files.md)    
 
 ### Floats
 
-1. [Floats Cheat Sheet](./C/floats.md)
+► [Floats Cheat Sheet](./C/floats.md)   
 
 ### Unicode
 
-1. [Unicode Cheat Sheet](./C/unicode.md)
+► [Unicode Cheat Sheet](./C/unicode.md)    
 
 ## [Assembly Programming](./ASM/README.md) 
 
 ### MIPS
 
-1. [Mips Cheat Sheet](./ASM/MIPS/MIPS_Cheat_Sheet.md)
+► [Mips Cheat Sheet](./ASM/MIPS/MIPS_Cheat_Sheet.md)   
 
 ## [Algorithms](./Algorithms/README.md)
 
 ### Graphs
 
-1. [Graph Fundementals](./Algorithms/Graphs/GraphBasics.md)
-2. [Depth First Search](./Algorithms/Graphs/DFS.md)
-3. [Breadth First Search](./Algorithms/Graphs/BFS.md)
-4. [Dijkstras {Shortest Paths}](./Algorithms/Graphs/Dijkstras.md)
+► [Graph Fundementals](./Algorithms/Graphs/GraphBasics.md)   
+► [Depth First Search](./Algorithms/Graphs/DFS.md)   
+► [Breadth First Search](./Algorithms/Graphs/BFS.md)   
+► [Dijkstras {Shortest Paths}](./Algorithms/Graphs/Dijkstras.md)   
 
 ### Trees
 
-## BSTs
+► [Tree Algorithms Cheat Sheet](./Algorithms/Trees/Trees.md)   
+► [BST Searching](./Algorithms/Trees/BSTSearch.md)   
+► [BST Insertion](./Algorithms/Trees/BSTInsertion.md)   
+► [BST Deletion](./Algorithms/Trees/BSTDeletion.md)   
 
-1. [Tree Algorithms Cheat Sheet](./Algorithms/Trees/Trees.md)
-2. [BST Searching](./Algorithms/Trees/BSTSearch.md)
-3. [BST Insertion](./Algorithms/Trees/BSTInsertion.md)
-4. [BST Deletion](./Algorithms/Trees/BSTDeletion.md)
+### Tries
 
-## Tries
-
-1. [Trie Algorithms Cheat Sheet](./Algorithms/Trees/Tries.md)
+► [Trie Algorithms Cheat Sheet](./Algorithms/Trees/Tries.md)
 
 ### Linked Lists
 
-1. [Searching](./Algorithms/LinkedLists/SearchingLLs.md)
-2. [Reversing](./Algorithms/LinkedLists/ReversingLLs.md)
-3. [Deleting](./Algorithms/LinkedLists/DeletingLLs.md)
-4. [Merging](./Algorithms/LinkedLists/MergingLLS.md)
+► [Searching](./Algorithms/LinkedLists/SearchingLLs.md)   
+► [Reversing](./Algorithms/LinkedLists/ReversingLLs.md)   
+► [Deleting](./Algorithms/LinkedLists/DeletingLLs.md)   
+► [Merging](./Algorithms/LinkedLists/MergingLLS.md)  
 
 ### Sorts
 
-1. [Sorting Overview](./Algorithms/Sorts/Sorting.md)
-2. [Bubble Sort](./Algorithms/Sorts/BubbleSort.md)
-3. [Insertion Sort](./Algorithms/Sorts/InsertionSort.md)
-4. [Merge Sort](./Algorithms/Sorts/MergeSort.md)
-5. [Quick Sort](./Algorithms/Sorts/QuickSort.md)
-6. [Selection Sort](./Algorithms/Sorts/SelectionSort.md)
+► [Sorting Overview](./Algorithms/Sorts/Sorting.md)  
+► [Bubble Sort](./Algorithms/Sorts/BubbleSort.md)   
+► [Insertion Sort](./Algorithms/Sorts/InsertionSort.md)   
+► [Merge Sort](./Algorithms/Sorts/MergeSort.md)  
+► [Quick Sort](./Algorithms/Sorts/QuickSort.md)  
+► [Selection Sort](./Algorithms/Sorts/SelectionSort.md)  
 
 ## [Data Structures](./Data%20Structures/README.md)
 
 ### Linked Lists
 
-1. [Linked List Cheatsheet](./Data%20Structures/LinkedLists/linked_lists.md)
+► [Linked List Cheatsheet](./Data%20Structures/LinkedLists/linked_lists.md)   
 
 ### Queues
-
-1. [Queues Cheat Sheet](./Data%20Structures/Queues/Queues.md)
+ 
+► [Queues Cheat Sheet](./Data%20Structures/Queues/Queues.md)   
 
 ### Trees
 
-1. [Binary Search Trees](./Data%20Structures/Trees/BSTs.md)
+► [Binary Search Trees](./Data%20Structures/Trees/BSTs.md)   
 
 ### Hash Tables
 
-1. [Hash Tables](./Data%20Structures/HashTable/HashTables.md)
+► [Hash Tables](./Data%20Structures/HashTable/HashTables.md)   
