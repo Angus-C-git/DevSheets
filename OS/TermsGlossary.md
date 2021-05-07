@@ -67,3 +67,17 @@ but never make progress
 
 * A process never receives the resource it is waiting for, despite the resource (repeatedly) becoming free, the resource is always allocated to another waiting process
 * Can be resolved with a first come first served policy
+
+
+### Working Set
+
+* The pages/segments required by an application in a time
+window (&) is called its memory working set.
+* Working set is an approximation of a programs’ locality
+    - if & too small will not encompass entire locality.
+    - if &  too large will encompass several localities.
+    - if de&& = infinity will encompass entire program.
+
+* &'s size is an application specific tradeoff
+* System should keep resident at least a process’s
+working set

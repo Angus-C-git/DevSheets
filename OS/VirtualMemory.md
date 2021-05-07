@@ -127,9 +127,40 @@ It is the job of virtual memory managment to provide a mapping between virtual a
 
 ![Two Level Page Table Diagram](./images/TwoLevelPT.svg)
 
-### Inverted Page Table
+### Inverted Page Table (IPT)
+
+* “Inverted page table” is an array of page numbers sorted (indexed) by frame number (it’s a frame table).
+
+* Algorithm
+
+1. Compute hash of page number
+2. Extract index from hash table
+3. Use this to index into inverted page table
+4. Match the PID and page number in the IPT entry
+5. If match, use the index value as frame # for translation
+6. If no match, get next candidate IPT entry from chain field
+7. If NULL chain entry -> page fault
+
+#### Properties
+
+* IPT grows with size of RAM, NOT virtual address space
+* Frame table is needed anyway (for page replacement,
+more later)
+* Need a separate data structure for non-resident pages
+* Saves a vast amount of space (especially on 64-bit
+systems)
 
 ### Hashed Page Table
+
+* Like IPT but use hashes of the virtual page number to index into the page table 
+
+#### Properties
+
+* HPT sized based on physical memory size
+* With sharing
+
+    - Each frame can have more than one PTE
+    - More sharing increases number of slots used, Increases collision likelihood
 
 ## The TLB
 
@@ -176,3 +207,10 @@ It is the job of virtual memory managment to provide a mapping between virtual a
     - Average number of physical memory refrences per virtual reference is
     - `= 0.99 * 1 + 0.01 * 2`
     - `= 1.01`
+
+
+## TLB Refill
+
+## Locality and Working Sets
+
+## Page Replacment Algorithms
