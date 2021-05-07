@@ -145,3 +145,22 @@ The remaining processes are deadlocked.
 
 #### Safe and Unsafe States
 
+
+##### Safe State
+
+* A safe state is a state when the system is not deadlocked. There exists a scheduling order that results in every process running to completion, even if they all request their maximum resources immediately 
+
+##### Unsafe State
+
+* An unsafe state does not necessarily that the system will result in deadlock, it could be lucky and complete with out an issue. We can however not guarantee that the system will complete (not deadlock)
+
+* A deadlock avoidance algorithm in essence only adds processes that will ensure a safe status 
+
+#### Bankers Algorithm
+
+* Keep the system (bank) in a safe state
+* Processes are only allowed to proceed if there are enough resources to accommodate their maximum possible request. Otherwise they have to wait for other processes to return resources before continuing. 
+* Although the bankers algorithm will prevent a deadlock it is impractical to know the maximum number of resources required in advance. 
+* Not commonly used in practice
+
+
