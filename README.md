@@ -1,7 +1,10 @@
-# DevSheets
+# [DevSheets](https://devsheets.cybernetic.coffee/)
+
 A collection of dictionarys and cheatsheets for, programming languages, frameworks &amp; deployment.
 
 **A work in progress, or lack there of.**
+
+See the hosted version at: [devsheets.cybernetic.coffee](https://devsheets.cybernetic.coffee/)
 
 # Contents
 
