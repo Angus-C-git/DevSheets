@@ -22,7 +22,14 @@
     - Double indirect blocks
     - Tripple indirect blocks
 
+### i-node contents
+
 ![Inode contents](./images/i-node.svg)
+
+
+### i-node schema
+
+![tmpInodeSchema](./images/tmpInodeSchema.png)
 
 ### Files Under i-nodes
 
@@ -35,3 +42,8 @@
 
 * Directories are a special kind of file that translate names to i-node numbers
 *  A directory entry contains only a name for the associated file and a pointer to the file itself, this pointer is an i-node number
+
+
+## Vnodes
+
+* Vnodes are a VFS (virtual file system) representation of i-nodes
