@@ -108,11 +108,13 @@ It is the job of virtual memory managment to provide a mapping between virtual a
 * How many page table entries do we need for one process
 
     - Consider a 32-bit virtual address (4GB address space)
-    - 4 Kbyte page size
+    - 4 Kbyte page size (for 32bit, 8 kByte for 64)
 
 * `2^32 / 2^12 = 2^20` entires
 * This is a huge address space for processes which are normally much smaler than this
 * Enter multi-level page tables
+
+* The number of page tables in the system is equal to the number of processes running in the system
 
 
 ### Multi-Level Page Tables
@@ -129,7 +131,9 @@ It is the job of virtual memory managment to provide a mapping between virtual a
 
 ### Inverted Page Table (IPT)
 
-* “Inverted page table” is an array of page numbers sorted (indexed) by frame number (it’s a frame table).
+* “Inverted page table” is an array of page numbers sorted (indexed) by frame number (it’s a frame table)
+* Thus now we index by frame number to an entry which also contains the page number
+* Because the performance hit of doing this normally would be large a hash table is used to speedup the translation
 
 * Algorithm
 
@@ -211,6 +215,128 @@ systems)
 
 ## TLB Refill
 
+* Typically handled by software
+* Responsible for updating the TLB with frame numbers found in page table entries
+
+
 ## Locality and Working Sets
 
+### The Principle of Locality
+
+> Programs Spend 90% of their time in 10% of their code 
+
+* Programs tend to reuse data amd instructions they have used recently
+* We can exploit this locality of refrences since we can use it to reasonably predict what instructions and data a program will use in the near future based on its accesses in the recent past
+
+### Temporal Locality
+
+* states that recently accessed items are likely to be accessed in the near future
+
+### Spatial locality
+
+* says that items whose addresses are near one another tend to be referenced close together in time
+
+### Working Set
+
+* The pages/segments required by an application in a time window (&) is called its memory working set.
+* Working set is an approximation of a programs’ locality
+* The system should aim to keep resident at least a processes working set
+* Note, the working set tends to change gradually
+
+#### Working Set Considerations
+
+If the pages/segments required by an application in a time window:
+
+* are too small will not encompass entire locality
+* are too large will encompass several localities
+* approach infinity will encompass entire program
+
+Thus & size is an application specific tradeoff.
+
+
+## Thrashing
+
+* Thrashing is the starvation of processes as memory avalibility becomes scarce due to the number of processes executing concurrently in a system.
+
+* This often occurs when we try to maximise CPU utilisation by increasing the degree of multiprogramming which also leads to there being less memory avaliable per process
+
+* When thrashing occurs CPU utilisation decreases and the system becomes I/O bound/limited
+
+### Recovery From Thrashing
+
+* Suspend a few processes to reduce degree of
+multiprogramming
+* Resident pages of suspended processes will migrate
+to backing store
+* More physical memory becomes available = Less faults, faster progress for runnable processe
+* Resume suspended processes later when memory
+pressure eases
+
+## Page Size
+
+* **Increasing Page Size**
+
+    - Increased internal fragmentation
+    - Decreasing number of pages = reduced size of page tables
+    - Increased tlb coverage = reduced TLB misses
+    - Increases page fault latency = need more disk reads before process restart
+    - Increased swapping I/O throughput = small I/O are dominated by seek/rotation delays
+
+* Most OS’ only support one page size, this is because dealing with varying page sizes is hard
+
+* Increasing the page size generally increases the working set size of an application
+* This is because the larger granularity of inclusion results in more virtual memory being included in the working set when only part of the page is actually accessed.
+
 ## Page Replacment Algorithms
+
+* To have an efficient virtual management system we need a way to choose pages to stash to disk that will have the least impact on performance
+* Generally this is the page least likely to be referenced in the near future
+* Typically this metric is determined by analysing past behaviour and using it to predict future behaviour
+
+### Optimal Replacement
+
+* A theoretical upper bound algorithm where the page that **won't** be used for the longest time is stored to disk
+* Impossible to implement in practice
+
+### FIFO Replacement
+
+ * First-in, first-out: Toss the oldest page
+ * Easy to implement
+ * Semi flawed metric in the sense that the age of the page isn't necessarily related to usage
+
+
+### Least Recently Used
+
+* Toss the least recently used page
+* Assumes that page that has not been referenced for a long time is unlikely to be referenced in the near future
+* Works if locality holds 
+* Implementation requires a time stamp to be kept for each page, updated on every reference
+* Impossible to implement efficiently, most implementations are approximations
+
+### Clock Page Replacement
+
+* Makes use of a reference bit in the frame table 
+* Reference bit set to one when page is used
+* When looking for a victim set each entries refrence bit to 0 one the way past
+* Toss the first page with a zero reference bit
+
+* We can use the valid bit in the page table entry to determine if the page is referenced
+* When a page is mapped (valid bit set), set the reference bit
+* When resetting the reference bit, invalidate the PTE entry
+* On a page fault turn on the valid bit and reference bit in the PTE
+
+## Cleaning Policy
+
+* Clean pages are cheaper to replace than dirty ones
+
+
+#### Demand Cleaning
+
+* A page is written out only when it has been selected for replacement
+* High latency between the decision to replace and availability of free frame
+
+#### Precleaning
+
+* Pages are written out in batches (in the background, the pagedaemon)
+* Increases likelihood of replacing clean frames
+* Overlap I/O with current activity

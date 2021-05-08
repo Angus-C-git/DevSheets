@@ -16,9 +16,16 @@
 
 * Something that operates as an indivisible unit. That is all parts of an atomic process execute as if they were one operation. In this way they are uninterubtable or divisible by any 
 
+
+### Bitmap
+
+* A data structure stored on disk to manage free disk blocks
+* The use of a bitmap can simplify the task of allocating a contiguous range of disk blocks
+* The bitmap reduces the disk capacity avaliable to be used for files 
+
 ### Critical Region
 
-
+* A region in a program that modifies a shared resource
 
 ### Deadlock
 
@@ -38,6 +45,11 @@
 
 ### Thread
 
+* A unit of execution which can be traced and belongs to a process
+
+### Thrashing
+
+* Thrashing is the starvation of processes as memory avalibility becomes scarce due to the number of processes executing concurrently in a system.
 
 ### Livelock
 
@@ -54,6 +66,11 @@ but never make progress
 
 ### Process
 
+### PCB
+
+* A processes’ information is stored in a process control block (PCB)
+* The PCBs form a process table
+* Reality can be more complex (hashing, chaining, allocation bitmaps,...)
 
 
 ### Race Condition
