@@ -1,12 +1,18 @@
-# MIPS & SPIM Assembler Cheat Sheet
+# MIPS Assembly Cheat Sheet
 
-## SPIM && MIPS Instructions 
+MIPS is a 32 bit assembly language which for some time has been commonplace in integrated devices which run many consumer products like; routers, washing machines, dishwashers and microwaves. It is gradually being replaced/superseded by the ARM instruction set.
+
+## SPIM
+
+SPIM is a simulator for the MIPS architecture. It implements a number of virtual instructions which represent one or several 'real' MIPS instructions. Typically the aliased SPIM instructions aim to simplify some common operations.
+
+## SPIM & MIPS Instructions 
 
 ### Bitwise Operations
 
 | SPIM Instruction | MIPS Instruction | Example              | Notes                              |
 | ---------------- | ---------------- | -------------------- | -----------------------------------|
-| ADD Rd, Rs, Rt   | ADD Rd, Rs, Rt   | 
+| `ADD Rd, Rs, Rt`   | `ADD Rd, Rs, Rt`   | 
 
 
 
@@ -15,42 +21,41 @@
 
 | SPIM Instruction | MIPS Instruction | Example              | Notes/Description                                                                            |
 | ---------------- | ---------------- | -------------------- | ---------------------------------------------------------------------------------------------|
-| move Rd, Rs      |                  | move $s1, $v0        | 'Copy' the value stored in the register (memory) on the right into the register on the left  |
-| mfhi Rd          | mfhi Rd          | mfhi $s1             |  Set a register equal to the high value in memory                                            |
-| mflo Rd          | mflo Rd          | mflo $s1             |  Set a register equal to the low value in memory                                             |
-| la Rd, Addr      |                  | la $a0, prompt       |  Load an address into a register, could be a label or register                               |
-| li Rd, imm       | lui	Rd, Imm   | li $v0, 4            |  Load a value immediately into a register, usable registers are 0..15, 16..31                |
-| lb Rd, Addr      |                  | lb $s1, label        |  Load a byte at a particular memory location                                                 |
-| lw Rd, Addr      |                  | lw $s1, x            |  Load a word at a particular memory location                                                 |
-| sb Rs, Addr      |                  | sb $t1, y            |                                                                                              |
+| `move Rd, Rs`      |                  | `move $s1, $v0`        | 'Copy' the value stored in the register (memory) on the right into the register on the left  |
+| `mfhi Rd`          | `mfhi Rd`          | `mfhi $s1`             |  Set a register equal to the high value in memory                                            |
+| `mflo Rd`          | `mflo Rd`          | `mflo $s1`             |  Set a register equal to the low value in memory                                             |
+| `la Rd, Addr`      |                  | `la $a0, prompt`       |  Load an address into a register, could be a label or register                               |
+| `li Rd, imm`       | `lui	Rd, Imm`   | `li $v0, 4`            |  Load a value immediately into a register, usable registers are 0..15, 16..31                |
+| `lb Rd, Addr`      |                  | `lb $s1, label`        |  Load a byte at a particular memory location                                                 |
+| `lw Rd, Addr`      |                  | `lw $s1, x`            |  Load a word at a particular memory location                                                 |
+| `sb Rs, Addr`      |                  | `sb $t1, y`            |                                                                                              |
 
 
 ### Branches
 
 | SPIM Instruction | MIPS Instruction | Example              | Notes/Description                                                                            |
 | ---------------- | ---------------- | -------------------- | ---------------------------------------------------------------------------------------------|
-| b  label         |                  | b end                |  Unconditional branch to label, basically same as jump                                       |
-| bal label        |                  | bal main             |  Branch and link                                                                             |
-| beq Rs, Rt, label|                  | beq $t0, $t1, msg    |  Branch if equal to                                                                          |
-| bne Rs, Rt, label|                  | bne $t1, $t4, pass   |  Branch if not equal                                                                         |
-| bge Rs, Rt, label|                  | bge $t1, $t4, pass   |  Branch if greater than or equal to                                                          |
-| ble Rs, Rt, label|                  | ble $t1, $t4, pass   |  Branch if less than or equal to                                                             |
+| `b  label`         |                  | `b end`                |  Unconditional branch to label, basically same as jump                                       |
+| `bal label`        |                  | `bal main`             |  Branch and link                                                                             |
+| `beq Rs, Rt, label`|                  | `beq $t0, $t1, msg`    |  Branch if equal to                                                                          |
+| `bne Rs, Rt, label`|                  | `bne $t1, $t4, pass`   |  Branch if not equal                                                                         |
+| `bge Rs, Rt, label`|                  | `bge $t1, $t4, pass`   |  Branch if greater than or equal to                                                          |
+| `ble Rs, Rt, label`|                  | `ble $t1, $t4, pass`   |  Branch if less than or equal to                                                             |
  
 ## Theory
 
 
 ### SPIM's Memory Layout
 
-![SPIM memory layout](memory.svg)
-
+{{< image ref="images/memory.svg">}}
 
 | Segment | Base          |
 | ------- |-------------- |
-| text    | 0x00400000    |
-| data    | 0x10000000    |
-| stack   | 0x7ffffeff    |
-| k_text  | 0x80000000    |
-| k_data  | 0x90000000    |
+| .text   | `0x00400000`  |
+| .data   | `0x10000000`  |
+| stack   | `0x7ffffeff`  |
+| k_text  | `0x80000000`  |
+| k_data  | `0x90000000`  |
 
 ### Arrays 
 
@@ -68,7 +73,7 @@ With these components we can cast out accurately into the array in memory and ma
 values stored there. 
 
 For example to access the i-th element in an array of integers, or in SPIM/MIPS `words` we can compute the
-address of the i-th element by multiplying i by the size in bytes of an integer (4), yeilding the expression:
+address of the i-th element by multiplying i by the size in bytes of an integer (4), yielding the expression:
 
 `array_address[i] = i * 4`
 
@@ -76,7 +81,7 @@ We can then access the value stored at that memory location by loading the array
 the keyword associated with the array type to store or load a value. For example to read the i-th value in 
 an array of integers, where i's value is stored in `$t0` we could use the following MIPS/SPIM code.
 
-```
+```asm
 # retrieve i-th array element value
 
 mul $t1, $t0, 4			# store the address of the i-th array element    
@@ -91,7 +96,9 @@ lw  $t4, ($t3)			# load the value stored at int_array[i]'s position into registe
 Similarly to one dimensional arrays two dimensional arrays should be consindered as sequential 
 blocks of memory. Where each row of the matrix is stored one after another.
 
-![2D-Array Diagram](2dArray.png)
+
+{{< image ref="images/2dArray.png">}}
+
 
 To access a given element in the array we require the following prerequisites:
 
@@ -103,7 +110,7 @@ To access a given element in the array we require the following prerequisites:
 We can then follow an extrapolated method from 1D arrays to get the [x][y]'th element from a 
 2D array in mips. 
 
-```
+```asm
 # $t0 holds x
 # $t1 holds y
 
@@ -131,18 +138,18 @@ To implement functions in MIPS/SPIM we are required to know a few details about 
 
 | Register Name | Role                                 |
 | ------------- | -----------------------------------  |
-| $v0, $v0      | Holds value from function return     |
-| $a0           | First argument to a function         |
-| $a1           | Second argument to a function        |
-| $a2           | Third argument to a function         |
-| $a3           | Fourth argument to a function        |
-| $sp           | Holds the value of the stack pointer |
-| $ra           | Holds the return address
+| `$v0, $v0`    | Holds value from function return     |
+| `$a0`         | First argument to a function         |
+| `$a1`         | Second argument to a function        |
+| `$a2`         | Third argument to a function         |
+| `$a3`         | Fourth argument to a function        |
+| `$sp`         | Holds the value of the stack pointer |
+| `$ra`         | Holds the return address             |
 
 The crux of function logic is pinned on utilizing the stack pointer to allot memory for arguments to our function and to store the return pointer. This logic
 is duplicated for recursive functions where the return address for the function is additionally saved in the stack. Function calls will nearly always follow a structure like this.
 
-```
+```asm
 # Simple function call with one argument
 
 main:
@@ -193,7 +200,7 @@ Non-programmatically this follows the process:
 
 #### Read N Numbers
 
-```
+```asm
 main:                       	# int main(void)
     la   $a0, prompt        	# printf("Enter a number: ");
     li   $v0, 4
@@ -236,9 +243,8 @@ prompt:
 
 #### One Dimensional
 
-##### Sort 10 Numbers
 
-```
+```asm
 # i in register $t0,
 # registers $t1 - $t3 used to hold temporary results
 
@@ -272,7 +278,7 @@ end0:
 
     mul $t1, $s1, 4             	# calculate i -> s1 (index counter) * sizeof(word) = numbers[i]
     la $t2, numbers 				# load the numbers array into t2
-    add $t3, $t1, $t2				# get the memeory adress for the value at the calculated address -> numbers[i] 
+    add $t3, $t1, $t2				# get the memory address for the value at the calculated address -> numbers[i] 
     lw $t5, ($t3)       			# set register t5 to store the value at the memory address stored in reg t3
 
     # store $t6 = numbers[i - 1] = y
@@ -324,10 +330,9 @@ numbers:
 
 #### Two Dimensional
 
-##### Print Elements Of a 2D-Array
+*Print elements of a 2D array*
 
-```
-
+```asm
 main:
     li   $s0, 0         # int i = 0;
 loop1:
@@ -372,9 +377,9 @@ numbers:
 
 ### Branching
 
-#### Return Score
+*Return Score*
 
-```
+```asm
 main:
     la   $a0, prompt            # printf("Enter a mark: ");
     li   $v0, 4
@@ -439,10 +444,10 @@ hd:
 
 ### Functions
 
+*Recursive Factorials*
 
-#### Recursive Factorials
-```
 
+```asm
 main:
     addi $sp, $sp, -8  # create stack frame
     sw   $ra, 4($sp)   # save return address
